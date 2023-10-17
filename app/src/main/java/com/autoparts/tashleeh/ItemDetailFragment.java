@@ -93,39 +93,40 @@ public class ItemDetailFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-//            String receivedData = bundle.getString("key1");
-//            String receivedImage = bundle.getString("key2");
-//            itemTitle.setText(receivedData);
-//            Picasso.get().load(receivedImage).into(itemImage);
-            String productID = bundle.getString("pid");
-            getProductDetails(productID);
             // Now 'receivedData' contains the data sent from Fragment A
+            String receivedData = bundle.getString("title");
+            String receivedImage = bundle.getString("image");
+            itemTitle.setText(receivedData);
+            Picasso.get().load(receivedImage).into(itemImage);
+            //String productID = bundle.getString("pid");
+            //getProductDetails(productID);
+
         }
 
         return view;
     }
 
-    private void getProductDetails(String productID) {
-        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-        productsRef.child(productID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    Products products=dataSnapshot.getValue(Products.class);
-                    itemTitle.setText(products.getPname());
-                    //productPrice.setText(products.getPrice());
-                    //productDescription.setText(products.getDescription());
-                    Picasso.get().load(products.getImage()).into(itemImage);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    private void getProductDetails(String productID) {
+//        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+//        productsRef.child(productID).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()){
+//                    Products products=dataSnapshot.getValue(Products.class);
+//                    itemTitle.setText(products.getPname());
+//                    //productPrice.setText(products.getPrice());
+//                    //productDescription.setText(products.getDescription());
+//                    Picasso.get().load(products.getImage()).into(itemImage);
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

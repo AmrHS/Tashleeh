@@ -31,7 +31,7 @@ public class GalleryFragment extends Fragment {
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
-    private List<Products> dataList;
+    private List<DataModel> dataList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,54 +89,14 @@ public class GalleryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gallery, container, false);
-        //dataList = generateData(); // You need to implement this method
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        dataList = generateData(); // You need to implement this method
         recyclerView = view.findViewById(R.id.recyclerView);
 
-        FirebaseRecyclerOptions<Products> options =
-                new FirebaseRecyclerOptions.Builder<Products>()
-                        .setQuery(ProductsRef, Products.class)
-                        .build();
-
-        FirebaseRecyclerAdapter<Products, RecyclerViewAdapter.MyViewHolder> adapter =
-                new FirebaseRecyclerAdapter<Products, RecyclerViewAdapter.MyViewHolder>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position, @NonNull final Products model)
-                    {
-                        holder.cardTitle.setText(model.getPname());
-                        Picasso.get().load(model.getImage()).into(holder.cardImage);
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ItemDetailFragment dataFragment = new ItemDetailFragment();
-                                Bundle bundle = new Bundle();
-                                bundle.putString("pid",model.getPid());
-                                dataFragment.setArguments(bundle);
-
-                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.frame_layout, dataFragment);
-                                fragmentTransaction.commit();
-
-                            }
-                        });
-                    }
-
-                    @NonNull
-                    @Override
-                    public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-                        return new RecyclerViewAdapter.MyViewHolder(view);
-                    }
-                };
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
 
         // Set up RecyclerView
-//        adapter = new RecyclerViewAdapter(getActivity(),dataList);
-//        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-//        recyclerView.setAdapter(adapter);
+        adapter = new RecyclerViewAdapter(getActivity(),dataList);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setAdapter(adapter);
 
 
         return view;

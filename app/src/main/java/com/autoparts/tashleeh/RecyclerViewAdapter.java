@@ -47,8 +47,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 ItemDetailFragment dataFragment = new ItemDetailFragment();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("key1",holder.cardTitle.getText().toString());
-                bundle.putString("key2",dataList.get(position).getImage());
+                bundle.putString("title",holder.cardTitle.getText().toString());
+                bundle.putString("image",dataList.get(position).getImage());
                 dataFragment.setArguments(bundle);
 
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();

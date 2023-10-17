@@ -28,7 +28,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         binding = ActivityHomeAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new GalleryFragment());
+        replaceFragment(new AdminItemsFragment());
         binding.bottomNavigationViewAdmin.setBackground(null);
         binding.bottomNavigationViewAdmin.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -53,7 +53,7 @@ public class AdminHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                replaceFragment(new GalleryFragment());
+                replaceFragment(new AdminItemsFragment());
             }
         });
 

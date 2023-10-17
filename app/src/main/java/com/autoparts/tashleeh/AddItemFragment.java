@@ -133,7 +133,7 @@ public class AddItemFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                replaceFragment(new GalleryFragment());
+                replaceFragment(new AdminItemsFragment());
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -364,7 +364,7 @@ public class AddItemFragment extends Fragment {
                     {
                         if (task.isSuccessful())
                         {
-                            replaceFragment(new GalleryFragment());
+                            replaceFragment(new AdminItemsFragment());
                             loadingBar.dismiss();
                             Toast.makeText(getActivity(), "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         }

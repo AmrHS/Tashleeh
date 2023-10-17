@@ -131,7 +131,7 @@ public class AdminUserFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                replaceFragment(new GalleryFragment());
+                replaceFragment(new AdminItemsFragment());
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -187,7 +187,7 @@ public class AdminUserFragment extends Fragment {
         userMap.put("address", addressEditText.getText().toString());
         //userMap.put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
-        replaceFragment(new GalleryFragment());
+        replaceFragment(new AdminItemsFragment());
         Toast.makeText(getActivity(), "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
     }
 
@@ -247,7 +247,7 @@ public class AdminUserFragment extends Fragment {
                         userMap. put("image", myUrl);
                         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
                         progressDialog.dismiss();
-                        replaceFragment(new GalleryFragment());
+                        replaceFragment(new AdminItemsFragment());
                         Toast.makeText(getActivity(), "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
                     }
                     else{
