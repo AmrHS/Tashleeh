@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddItemFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="343dp"
+                android:layout_height="127dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_upload"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="326dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_image">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="الاسم" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/company_spinner"
+                android:layout_width="326dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="28dp"
+                android:layout_weight="1"
+                android:background="@drawable/spinner_outline"
+                android:textDirection="rtl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="326dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/company_spinner">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="الموديل" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/year_spinner"
+                android:layout_width="326dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/spinner_outline"
+                android:textDirection="rtl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="326dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/year_spinner">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="الفئة" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="326dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/item_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="السعر"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/add_item_btn"
+                android:layout_width="326dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="32dp"
+                android:text="إضافة"
+
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_description" />
+
+            <EditText
+                android:id="@+id/item_description"
+                android:layout_width="325dp"
+                android:layout_height="133dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/outline"
+                android:gravity="start"
+                android:hint="الوصف"
+                android:inputType="text"
+                android:lines="5"
+                android:maxLines="10"
+                android:padding="10dp"
+                android:textDirection="rtl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.515"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+
+
+            <!--        <com.google.android.material.textfield.TextInputLayout-->
+            <!--            android:id="@+id/textInputLayout1"-->
+            <!--            android:layout_width="326dp"-->
+            <!--            android:layout_height="60dp"-->
+            <!--            android:layout_marginTop="32dp"-->
+            <!--            android:padding="4dp"-->
+            <!--            app:boxBackgroundMode="outline"-->
+            <!--            app:boxCornerRadiusTopStart="20dp"-->
+            <!--            app:boxStrokeColor="#000000"-->
+            <!--            app:boxStrokeWidth="40dp"-->
+            <!--            app:boxStrokeWidthFocused="40dp"-->
+            <!--&gt;      </com.google.android.material.textfield.TextInputLayout>-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</FrameLayout>

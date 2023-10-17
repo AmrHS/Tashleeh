@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661435262822",
+    "project_id": "tashleeh-ff98e",
+    "storage_bucket": "tashleeh-ff98e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661435262822:android:f68603e2cba48151120aa7",
+        "android_client_info": {
+          "package_name": "com.autoparts.tashleeh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7DpvxjD7OpLot-eoWw8um6Uw6gfywtxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
