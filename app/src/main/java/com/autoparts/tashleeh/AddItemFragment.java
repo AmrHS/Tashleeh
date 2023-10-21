@@ -58,7 +58,7 @@ public class AddItemFragment extends Fragment {
     private String CategoryName, Model, Company, Year, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
     private Button AddNewProductButton;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescription, InputProductPrice,InputCategoryName,InputProductModel;
+    private EditText InputProductName, InputProductDescription, InputProductPrice,InputProductModel;
     private static final int GalleryPick = 1;
     private Uri imageUri;
     private String productRandomKey, downloadImageUrl;
@@ -190,10 +190,30 @@ public class AddItemFragment extends Fragment {
         });
         //==============================================
 
+        //CategorySpinner======================================
+        Spinner Category_spinner = view.findViewById(R.id.category_spinner);
+        ArrayAdapter<CharSequence> category_adapter = ArrayAdapter.createFromResource(
+            getActivity(),
+            R.array.categories_array,
+            android.R.layout.simple_spinner_item
+        );
+        category_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Category_spinner.setAdapter(category_adapter);
+        Category_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                CategoryName = adapterView.getItemAtPosition(pos).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        //==============================================
+
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-
-        InputCategoryName = view.findViewById(R.id.item_category);
         AddNewProductButton = view.findViewById(R.id.add_item_btn);
         InputProductImage = view.findViewById(R.id.item_image);
         InputProductName = view.findViewById(R.id.item_name);
@@ -240,7 +260,6 @@ public class AddItemFragment extends Fragment {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
-        CategoryName = InputCategoryName.getText().toString();
         Model = InputProductModel.getText().toString();
 
         if (imageUri == null)

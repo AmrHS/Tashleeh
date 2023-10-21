@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_images_array">
+
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04123855/V12-engine-AR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04123950/GearAR04112021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04124025/AIRfilterAR04112021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04124249/gasoline-filterAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04124638/fuelpumpAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04125113/radiator-in-carAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04125234/waterpumpAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04125459/ABSAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04125727/exhaustAR1104202-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04130147/CArdynamoAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04133124/carbatteryAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04125915/sparkplugsAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04130018/FanAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04132340/carlightsAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04133225/carstarterAR04112021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04132501/car-computerAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04132603/fuse-boxAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04132919/carsuspensionsystemAR11042021-1024x640.jpg</item>
+        <item>https://d2hucwwplm5rxi.cloudfront.net/wp-content/uploads/2021/11/04133312/car-steering-system-partsAR11042021-1024x640.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Temporary_plate.svg/601px-Temporary_plate.svg.png</item>
+    </string-array>
+</resources>

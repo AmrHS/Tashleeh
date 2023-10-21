@@ -45,6 +45,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-storage:19.2.1")
     implementation ("com.firebaseui:firebase-ui-database:8.0.2")
     implementation (platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation ("io.github.pilgr:paperdb:2.7.2")
     implementation ("androidx.recyclerview:recyclerview:1.3.1")
     implementation ("androidx.cardview:cardview:1.0.0")

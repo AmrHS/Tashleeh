@@ -88,23 +88,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout3"
+            <Spinner
+                android:id="@+id/category_spinner"
                 android:layout_width="326dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/spinner_outline"
+                android:textDirection="rtl"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.489"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/year_spinner">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="الفئة" />
-            </com.google.android.material.textfield.TextInputLayout>
-
+                app:layout_constraintTop_toBottomOf="@+id/year_spinner"/>
+            />
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout4"
                 android:layout_width="326dp"
@@ -113,7 +109,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.489"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+                app:layout_constraintTop_toBottomOf="@+id/category_spinner">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_price"

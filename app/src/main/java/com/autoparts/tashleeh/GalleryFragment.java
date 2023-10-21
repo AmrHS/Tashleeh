@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GalleryFragment extends Fragment {
@@ -103,13 +104,16 @@ public class GalleryFragment extends Fragment {
     }
 
     private List<DataModel> generateData() {
-         List<DataModel> dataList = new ArrayList<>();
-         dataList.add(new DataModel("قطع غيار1","https://t3.ftcdn.net/jpg/01/59/42/26/240_F_159422695_LshFmeM9uQVJO73K7klE3zQRDk4QxlC8.jpg"));
-         dataList.add(new DataModel("قطع غيار2","https://www.asm-autos.co.uk/image/fit-800/images/car-door-for-sale.jpg"));
-         dataList.add(new DataModel("قطع غيار3","https://t3.ftcdn.net/jpg/01/59/42/26/240_F_159422695_LshFmeM9uQVJO73K7klE3zQRDk4QxlC8.jpg"));
-         dataList.add(new DataModel("قطع غيار4","https://www.asm-autos.co.uk/image/fit-800/images/car-door-for-sale.jpg"));
-         dataList.add(new DataModel("قطع غيار5","https://t3.ftcdn.net/jpg/01/59/42/26/240_F_159422695_LshFmeM9uQVJO73K7klE3zQRDk4QxlC8.jpg"));
-         dataList.add(new DataModel("قطع غيار6","https://www.asm-autos.co.uk/image/fit-800/images/car-door-for-sale.jpg"));
+        String[] catArray = getResources().getStringArray(R.array.categories_array);
+        String[] catimgArray = getResources().getStringArray(R.array.category_images_array);
+        List<DataModel> dataList = new ArrayList<>();
+        //List<String> myResArrayList = Arrays.asList(myResArray);
+        for(int i=0;i<catArray.length;i++){
+            String cat = catArray[i];
+            String catimg = catimgArray[i];
+            dataList.add(new DataModel(cat,catimg));
+
+        }
 
          return dataList;
     }
