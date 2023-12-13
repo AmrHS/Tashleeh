@@ -26,23 +26,31 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_home);
+
+
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("click_action")) {
+            String clickAction = getIntent().getExtras().getString("click_action");
+
+            if ("OPEN_ACTIVITY".equals(clickAction)) {
+                replaceFragment(new SearchFragment(),"search");
+            }
+        }
+
         mAuth = FirebaseAuth.getInstance();
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new GalleryFragment());
+        replaceFragment(new GalleryFragment(),"gallery");
         binding.bottomNavigationView.setBackground(null);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.user) {
-                replaceFragment(new UserFragment());
+                replaceFragment(new UserFragment(),"user");
             } else if (itemId == R.id.search) {
-                replaceFragment(new SearchFragment());
-            } else if (itemId == R.id.notifications) {
-                replaceFragment(new NotificationsFragment());
+                replaceFragment(new SearchFragment(),"search");
             } else if (itemId == R.id.logout) {
-                Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "تم تسجيل الخروج", Toast.LENGTH_SHORT).show();
                 Paper.book().destroy();
                 Intent intent=new Intent(HomeActivity.this,LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK );
@@ -56,9 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                replaceFragment(new GalleryFragment());
+                replaceFragment(new GalleryFragment(),"gallery");
             }
         });
 
@@ -66,19 +72,28 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment,String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.replace(R.id.frame_layout, fragment,tag);
         fragmentTransaction.commit();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        if (user == null){
-//            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-//        }
+
+    }
+    public void clearSearch(){
+        FragmentManager fm = getSupportFragmentManager();
+        SearchFragment fragment = (SearchFragment) fm.findFragmentByTag("search");
+        fragment.clearSearch();
+    }
+
+    public void applyFilter(String company,String category,String year){
+        FragmentManager fm = getSupportFragmentManager();
+        SearchFragment fragment = (SearchFragment) fm.findFragmentByTag("search");
+        fragment.applyFilter(company,category,year);
+
     }
 }

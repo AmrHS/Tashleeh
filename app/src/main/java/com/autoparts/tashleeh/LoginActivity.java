@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import io.paperdb.Paper;
 
@@ -34,9 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText etLoginPhone;
     TextInputEditText etLoginPassword;
     TextView registerHere;
+    TextView newAdmin;
     Button btnLogin;
     ProgressDialog loadingBar;
     TextView adminLink, notAdminLink;
+
+    ImageView ownerLogin;
 
     FirebaseAuth mAuth;
     String parentDbName = "Users";
@@ -46,19 +51,66 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-//        startActivity(i);
-//        finish();
+
+//============================================================================
+
+        FirebaseMessaging.getInstance().subscribeToTopic("allDevices")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("Tashleeh", "Sent successfully to all devices");
+                    } else {
+                        Log.e("Tashleeh", "Failed to send notification: " + task.getException());
+                    }
+                });
+
+
+//==========================================================================
+
         etLoginPhone = findViewById(R.id.etLoginPhone);
         etLoginPassword = findViewById(R.id.etLoginPass);
         btnLogin = findViewById(R.id.btnLogin);
         registerHere = findViewById(R.id.register_here);
+        newAdmin = findViewById(R.id.new_admin);
         adminLink = findViewById(R.id.admin_panel_link);
         notAdminLink = findViewById(R.id.not_admin_panel_link);
         loadingBar = new ProgressDialog(this);
         Paper.init(this);
 
-        mAuth = FirebaseAuth.getInstance();
+        ownerLogin = findViewById(R.id.owner_login);
+        ownerLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone = etLoginPhone.getText().toString();
+                String password = etLoginPassword.getText().toString();
+
+                if (TextUtils.isEmpty(phone))
+                {
+                    Toast.makeText(LoginActivity.this,"يرجى ادخال رقم و كلمة مرور الادارة",Toast.LENGTH_SHORT).show();
+                }
+                else if (TextUtils.isEmpty(password))
+                {
+                    Toast.makeText(LoginActivity.this,"يرجى ادخال رقم و كلمة مرور الادارة",Toast.LENGTH_SHORT).show();
+                }
+                else if(phone.equals("00000") && password.equals("11111"))
+                {
+
+                    startActivity(new Intent(LoginActivity.this, OwnerActivity.class));
+
+                }else{
+                    Toast.makeText(LoginActivity.this,"يرجى ادخال رقم و كلمة مرور الادارة",Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+        });
+
+        newAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, AdminRegisterActivity.class));
+            }
+        });
 
         btnLogin.setOnClickListener(view -> {
             loginUser();
@@ -119,11 +171,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(phone))
         {
-            Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "برجاء كتابة الرقم", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(password))
         {
-            Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "برجاء كتابة الباسورد", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -136,28 +188,7 @@ public class LoginActivity extends AppCompatActivity {
             AllowAccessToAccount(phone, password);
         }
 
-//        if (TextUtils.isEmpty(mail)){
-//            etLoginPhone.setError("Email cannot be empty");
-//            etLoginPhone.requestFocus();
-//        }else if (TextUtils.isEmpty(password)){
-//            etLoginPassword.setError("Password cannot be empty");
-//            etLoginPassword.requestFocus();
-//        }else{
-//            mAuth.signInWithEmailAndPassword(mail,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if (task.isSuccessful()){
-//                        Log.d(TAG, "signInWithEmail:success");
-//                        Toast.makeText(LoginActivity.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-//                    }else{
-//                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-//
-//                        Toast.makeText(LoginActivity.this, "Log in Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//        }
+
     }
 
     private void AllowAccessToAccount(final String phone, final String password)
@@ -181,7 +212,7 @@ public class LoginActivity extends AppCompatActivity {
                         {
                             if(parentDbName.equals("Admins"))
                             {
-                                Toast.makeText(LoginActivity.this, "Welcome Admin, you are logged in Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "أهلا بك", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
                                 Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
@@ -189,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                             else if (parentDbName.equals("Users")){
-                                Toast.makeText(LoginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "تم تسجيل الدخول", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
 
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -200,12 +231,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
                             loadingBar.dismiss();
-                            Toast.makeText(LoginActivity.this,"Password is incorrect",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"باسورد غير صحيح",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 else {
-                    Toast.makeText(LoginActivity.this, "Account with this " + phone + " number do not exists.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "هذا الحساب -  " + phone + " موجود بالفعل", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }
@@ -215,7 +246,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        Log.d("AMR", Paper.book().read(Prevalent.level));
+
     }
 
 
@@ -250,12 +281,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
                             loadingBar.dismiss();
-                            Toast.makeText(LoginActivity.this,"Password is incorrect",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"باسورد غير صحيح",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 else {
-                    Toast.makeText(LoginActivity.this, "Account with this " + phone + " number do not exists.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "هذا الحساب" + phone + " موجود بالفعل", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }
@@ -265,7 +296,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        Log.d("AMR", Paper.book().read(Prevalent.level));
+
     }
 
     @Override
@@ -273,4 +304,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
     }
+
+
 }

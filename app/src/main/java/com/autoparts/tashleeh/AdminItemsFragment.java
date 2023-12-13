@@ -44,7 +44,7 @@ public class AdminItemsFragment extends Fragment {
     private RecyclerView recyclerView;
     List<String> dataList = new ArrayList<>();
     public AdminItemsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -95,7 +95,7 @@ public class AdminItemsFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()){
-                                                    Toast.makeText(getActivity(),"Item removed Successfully.",Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getActivity(),"تم ازالة القطعة",Toast.LENGTH_SHORT).show();
                                                     replaceFragment(new AdminItemsFragment());
                                                 }
                                             }
@@ -124,23 +124,19 @@ public class AdminItemsFragment extends Fragment {
                     Products product = postSnapshot.getValue(Products.class);
                     dataList.add(product.getModel());
                 }
-                Log.d("AMR",dataList.toString());
+
                 Set uniqueValues = new HashSet(dataList);
-                Log.d("AMR",uniqueValues.toString());
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("AMR", "loadPost:onCancelled", databaseError.toException());
+
 
             }
         });
 
-        // Set up RecyclerView
-//        adapter = new RecyclerViewAdapter(getActivity(),dataList);
-//        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-//        recyclerView.setAdapter(adapter);
+
 
         return view;
     }

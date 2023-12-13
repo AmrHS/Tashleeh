@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddItemFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/filter_image"
+            android:layout_width="53dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_filter"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/filter_company_spinner"
+            android:layout_width="326dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="128dp"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_outline"
+            android:textDirection="rtl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/filter_category_spinner"
+            android:layout_width="326dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_outline"
+            android:textDirection="rtl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_year_spinner" />
+
+        <Button
+            android:id="@+id/save_filter"
+            android:layout_width="326dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="@color/dark_blue"
+            android:text="حفظ"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/white"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.517"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_category_spinner" />
+
+        <Spinner
+            android:id="@+id/filter_year_spinner"
+            android:layout_width="326dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_outline"
+            android:textDirection="rtl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_company_spinner" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            app:layout_constraintTop_toBottomOf="@+id/save_filter"
+            tools:layout_editor_absoluteX="176dp" />
+
+
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--            android:id="@+id/textInputLayout1"-->
+        <!--            android:layout_width="326dp"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_marginTop="32dp"-->
+        <!--            android:padding="4dp"-->
+        <!--            app:boxBackgroundMode="outline"-->
+        <!--            app:boxCornerRadiusTopStart="20dp"-->
+        <!--            app:boxStrokeColor="#000000"-->
+        <!--            app:boxStrokeWidth="40dp"-->
+        <!--            app:boxStrokeWidthFocused="40dp"-->
+        <!--&gt;      </com.google.android.material.textfield.TextInputLayout>-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

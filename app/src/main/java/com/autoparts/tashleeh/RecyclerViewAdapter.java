@@ -44,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ItemDetailFragment dataFragment = new ItemDetailFragment();
+                SearchFragment dataFragment = new SearchFragment();
 
                 Bundle bundle = new Bundle();
                 bundle.putString("title",holder.cardTitle.getText().toString());

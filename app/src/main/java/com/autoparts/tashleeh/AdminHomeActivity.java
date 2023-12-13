@@ -23,7 +23,6 @@ public class AdminHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
 
         binding = ActivityHomeAdminBinding.inflate(getLayoutInflater());
@@ -37,7 +36,7 @@ public class AdminHomeActivity extends AppCompatActivity {
             }  else if (itemId == R.id.add) {
                 replaceFragment(new AddItemFragment());
             } else if (itemId == R.id.logout) {
-                Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "تم تسجيل الخروج", Toast.LENGTH_SHORT).show();
                 Paper.book().destroy();
                 Intent intent=new Intent(AdminHomeActivity.this,LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK );
@@ -51,8 +50,6 @@ public class AdminHomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
                 replaceFragment(new AdminItemsFragment());
             }
         });
@@ -71,9 +68,6 @@ public class AdminHomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        if (user == null){
-//            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-//        }
+
     }
 }

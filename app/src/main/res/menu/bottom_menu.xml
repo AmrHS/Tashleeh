@@ -9,10 +9,6 @@
         android:title="User"
         android:icon="@drawable/ic_user"/>
     <item
-        android:id="@+id/notifications"
-        android:title="Notifications"
-        android:icon="@drawable/ic_notifications"/>
-    <item
         android:id="@+id/search"
         android:title="Search"
         android:icon="@drawable/ic_search"/>

@@ -77,28 +77,18 @@ public class UserFragment extends Fragment {
     private StorageReference storageProfilePrictureRef;
     private String checker = "";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public UserFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
+
     public static UserFragment newInstance(String param1, String param2) {
         UserFragment fragment = new UserFragment();
         Bundle args = new Bundle();
@@ -117,14 +107,12 @@ public class UserFragment extends Fragment {
         }
 
         storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
-        // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
         someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == RESULT_OK) {
-                            // There are no request codes
                             Intent data = result.getData();
 
                             if (data!=null)
@@ -157,7 +145,6 @@ public class UserFragment extends Fragment {
         new ActivityResultContracts.RequestPermission(),
         isGranted -> {
             if (isGranted) {
-                // Permission granted, proceed with your logic
                 Toast.makeText(getActivity(), "Permission Granted!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Permission Denied, Try Again.", Toast.LENGTH_SHORT).show();
@@ -176,7 +163,6 @@ public class UserFragment extends Fragment {
         profileChangeBtn =  view.findViewById(R.id.profile_image_change_btn);
         locationChangeBtn =  view.findViewById(R.id.location_change_btn);
 
-        //closeTextBtn =  view.findViewById(R.id.close_settings_btn);
         saveButton = view.findViewById(R.id.user_update_btn);
 
         userInfoDisplay(profileImageView, fullNameEditText, userPhoneEditText, addressEditText);
@@ -201,7 +187,6 @@ public class UserFragment extends Fragment {
             public void onClick(View view)
             {
                 checker = "clicked";
-                //Picasso.get().load(dataList.get(position).getImage()).into(holder.cardImage);
                 OpenGallery();
             }
         });
@@ -247,25 +232,24 @@ public class UserFragment extends Fragment {
         HashMap<String, Object> userMap = new HashMap<>();
         userMap.put("name", fullNameEditText.getText().toString());
         userMap.put("address", addressEditText.getText().toString());
-        //userMap.put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
         replaceFragment(new GalleryFragment());
-        Toast.makeText(getActivity(), "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "تم التحديث", Toast.LENGTH_SHORT).show();
     }
 
     private void userInfoSaved()
     {
         if (TextUtils.isEmpty(fullNameEditText.getText().toString()))
         {
-            Toast.makeText(getActivity(), "Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "الاسم", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(addressEditText.getText().toString()))
         {
-            Toast.makeText(getActivity(), "address is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "العنوان", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(userPhoneEditText.getText().toString()))
         {
-            Toast.makeText(getActivity(), "Phone is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "الرقم", Toast.LENGTH_SHORT).show();
         }
         else if(checker.equals("clicked"))
         {
@@ -310,7 +294,7 @@ public class UserFragment extends Fragment {
                         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
                         progressDialog.dismiss();
                         replaceFragment(new GalleryFragment());
-                        Toast.makeText(getActivity(), "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "تم التحديث", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         progressDialog.dismiss();
@@ -321,7 +305,7 @@ public class UserFragment extends Fragment {
         }
         else
         {
-            Toast.makeText(getActivity(), "image is not selected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "الصورة", Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_categories_array">
+        <item>الفئة</item>
+        <item>المحرك</item>
+        <item>ناقل الحركة (الجير)</item>
+        <item>فلتر الهواء</item>
+        <item>فلتر البنزين</item>
+        <item>مضخة الوقود</item>
+        <item>الرديتر</item>
+        <item>مضخة الماء</item>
+        <item>نظام منع انغلاق المكابح ABS</item>
+        <item>العادم</item>
+        <item>الدينامو</item>
+        <item>البطارية</item>
+        <item>شمعات الاحتراق (البواجي)</item>
+        <item>مراوح التبريد</item>
+        <item>أضواء السيارة</item>
+        <item>السلف</item>
+        <item>وحدة التحكم الإلكترونية (الكمبيوتر)</item>
+        <item>علبة الفيوزات</item>
+        <item>المفصل</item>
+        <item>المقص</item>
+        <item>المحور الصلب</item>
+        <item>النابض</item>
+        <item>أعمدة التوازن</item>
+        <item>عجلة القيادة</item>
+        <item>عمود القيادة</item>
+        <item>علبة التوجيه</item>
+        <item>أذرع التوجيه (وصلات التعليق)</item>
+        <item>الباور ستيرنج</item>
+
+    </string-array>
+</resources>

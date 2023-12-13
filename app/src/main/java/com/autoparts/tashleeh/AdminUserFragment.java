@@ -71,28 +71,19 @@ public class AdminUserFragment extends Fragment {
     private StorageReference storageProfilePrictureRef;
     private String checker = "";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
     public AdminUserFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static AdminUserFragment newInstance(String param1, String param2) {
         AdminUserFragment fragment = new AdminUserFragment();
         Bundle args = new Bundle();
@@ -111,14 +102,13 @@ public class AdminUserFragment extends Fragment {
         }
 
         storageProfilePrictureRef = FirebaseStorage.getInstance().getReference().child("Profile pictures");
-        // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
+
         someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == RESULT_OK) {
-                            // There are no request codes
                             Intent data = result.getData();
 
                             if (data!=null)
@@ -150,7 +140,6 @@ public class AdminUserFragment extends Fragment {
         new ActivityResultContracts.RequestPermission(),
         isGranted -> {
             if (isGranted) {
-                // Permission granted, proceed with your logic
                 Toast.makeText(getActivity(), "Permission Granted!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Permission Denied, Try Again.", Toast.LENGTH_SHORT).show();
@@ -167,7 +156,6 @@ public class AdminUserFragment extends Fragment {
         addressEditText =  view.findViewById(R.id.admin_address_input);
         profileChangeBtn =  view.findViewById(R.id.admin_image_change_btn);
         locationChangeBtn =  view.findViewById(R.id.admin_location_change_btn);
-        //closeTextBtn =  view.findViewById(R.id.close_settings_btn);
         saveButton = view.findViewById(R.id.admin_update_btn);
 
         userInfoDisplay(profileImageView, fullNameEditText, userPhoneEditText, addressEditText);
@@ -192,7 +180,6 @@ public class AdminUserFragment extends Fragment {
             public void onClick(View view)
             {
                 checker = "clicked";
-                //Picasso.get().load(dataList.get(position).getImage()).into(holder.cardImage);
                 OpenGallery();
             }
         });
@@ -203,7 +190,6 @@ public class AdminUserFragment extends Fragment {
             {
                 if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
-                    // Request permission
                     requestLocationPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION);
                 }else {
                     FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -236,25 +222,24 @@ public class AdminUserFragment extends Fragment {
         HashMap<String, Object> userMap = new HashMap<>();
         userMap.put("name", fullNameEditText.getText().toString());
         userMap.put("address", addressEditText.getText().toString());
-        //userMap.put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
         replaceFragment(new AdminItemsFragment());
-        Toast.makeText(getActivity(), "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "تم التحديث", Toast.LENGTH_SHORT).show();
     }
 
     private void userInfoSaved()
     {
         if (TextUtils.isEmpty(fullNameEditText.getText().toString()))
         {
-            Toast.makeText(getActivity(), "Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "خطأ الاسم", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(addressEditText.getText().toString()))
         {
-            Toast.makeText(getActivity(), "address is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "خطأ العنوان", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(userPhoneEditText.getText().toString()))
         {
-            Toast.makeText(getActivity(), "Phone is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "خطأ الرقم", Toast.LENGTH_SHORT).show();
         }
         else if(checker.equals("clicked"))
         {
@@ -294,12 +279,11 @@ public class AdminUserFragment extends Fragment {
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap. put("name", fullNameEditText.getText().toString());
                         userMap. put("address", addressEditText.getText().toString());
-                        //userMap. put("phoneOrder", userPhoneEditText.getText().toString());
                         userMap. put("image", myUrl);
                         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
                         progressDialog.dismiss();
                         replaceFragment(new AdminItemsFragment());
-                        Toast.makeText(getActivity(), "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "تم التحديث", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         progressDialog.dismiss();
@@ -310,7 +294,7 @@ public class AdminUserFragment extends Fragment {
         }
         else
         {
-            Toast.makeText(getActivity(), "image is not selected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "برجاء اختيار الصورة", Toast.LENGTH_SHORT).show();
         }
 
     }

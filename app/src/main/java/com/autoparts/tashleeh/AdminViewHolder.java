@@ -20,7 +20,6 @@ public class AdminViewHolder extends RecyclerView.ViewHolder {
         cardImage = itemView.findViewById(R.id.admin_card_image);
         removeItem = itemView.findViewById(R.id.admin_remove_btn);
 
-        // Initialize views in the card layout here
     }
 
 }

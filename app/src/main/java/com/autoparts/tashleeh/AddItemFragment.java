@@ -38,10 +38,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONObject;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.Calendar;
@@ -66,28 +72,16 @@ public class AddItemFragment extends Fragment {
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public AddItemFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddItemFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static AddItemFragment newInstance(String param1, String param2) {
         AddItemFragment fragment = new AddItemFragment();
         Bundle args = new Bundle();
@@ -112,7 +106,6 @@ public class AddItemFragment extends Fragment {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == RESULT_OK) {
-                            // There are no request codes
                             Intent data = result.getData();
 
                             if (data!=null)
@@ -121,7 +114,7 @@ public class AddItemFragment extends Fragment {
                                 InputProductImage.setImageURI(imageUri);
                             } else
                             {
-                                Toast.makeText(getActivity(), "Error, Try Again.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "خطأ .. حاول مرة اخرى", Toast.LENGTH_SHORT).show();
                                 replaceFragment(new AddItemFragment());
                             }
                         }
@@ -264,30 +257,30 @@ public class AddItemFragment extends Fragment {
 
         if (imageUri == null)
         {
-            Toast.makeText(getActivity(), "Product image is mandatory...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف صورة", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Description))
         {
-            Toast.makeText(getActivity(), "Please write product description...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف وصف", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Price))
         {
-            Toast.makeText(getActivity(), "Please write product Price...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف سعر", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Pname))
         {
-            Toast.makeText(getActivity(), "Please write product name...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف اسم", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(CategoryName))
         {
-            Toast.makeText(getActivity(), "Please write product category...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف فئة", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Company))
         {
-            Toast.makeText(getActivity(), "Please write product company...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف شركة", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(Model))
         {
-            Toast.makeText(getActivity(), "Please write product model...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "أضف موديل", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -328,7 +321,7 @@ public class AddItemFragment extends Fragment {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getActivity(), "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "تم رفع الصورة", Toast.LENGTH_SHORT).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -348,7 +341,7 @@ public class AddItemFragment extends Fragment {
                         {
                             downloadImageUrl = task.getResult().toString();
 
-                            Toast.makeText(getActivity(), "got the Product image Url Successfully...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "تم تحصيل لينك الصورة", Toast.LENGTH_SHORT).show();
 
                             SaveProductInfoToDatabase();
                         }
@@ -374,7 +367,7 @@ public class AddItemFragment extends Fragment {
         productMap.put("model", Model);
         productMap.put("year", Year);
         productMap.put("company", Company);
-        Log.d("AMR",productMap.toString());
+
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -385,7 +378,8 @@ public class AddItemFragment extends Fragment {
                         {
                             replaceFragment(new AdminItemsFragment());
                             loadingBar.dismiss();
-                            Toast.makeText(getActivity(), "Product is added successfully..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "تم اضافة القطعة", Toast.LENGTH_SHORT).show();
+                            sendFCMNotification();
                         }
                         else
                         {
@@ -395,6 +389,63 @@ public class AddItemFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void sendFCMNotification() {
+
+        FirebaseMessaging.getInstance().subscribeToTopic("allDevices")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("Tashleeh", "Sent successfully to all devices");
+                    } else {
+                        Log.e("Tashleeh", "Failed to send notification: " + task.getException());
+                    }
+                });
+
+        new Thread(() -> {
+            try {
+                // Set FCM server key
+                String serverKey = "AAAAmgCdJ2Y:APA91bF3P6hKZnlEISmFdG5nUW1IG_zpii9jR0q5lHkRr3bxaD9rqahv7ZiqD7XROs_-i2Zql86v9w40AT6a5YchNBpa4Be-IhGWs4uAEbH50kg1nHmp7P6BjxZJz6EiJ2Oo2FFpmKM2";
+
+                // Set FCM endpoint
+                String fcmEndpoint = "https://fcm.googleapis.com/fcm/send";
+
+                // Create a connection to the FCM server
+                URL url = new URL(fcmEndpoint);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Authorization", "key=" + serverKey);
+                connection.setDoOutput(true);
+
+                // Create the JSON payload for the notification
+                JSONObject jsonPayload = new JSONObject();
+                jsonPayload.put("to", "/topics/allDevices"); // Send to all users
+
+                JSONObject notification = new JSONObject();
+                notification.put("title", "!! قطع جديدة");
+                notification.put("body", "اضافات جديدة لتشليح شرورة");
+
+                JSONObject data = new JSONObject();
+                data.put("click_action", "OPEN_ACTIVITY");
+
+                jsonPayload.put("notification", notification);
+                jsonPayload.put("data", data);
+
+                // Send the FCM notification
+                try (OutputStream outputStream = connection.getOutputStream()) {
+                    outputStream.write(jsonPayload.toString().getBytes("UTF-8"));
+                }
+
+                // Get the response from the FCM server
+                int responseCode = connection.getResponseCode();
+                Log.d("Tashleeh", "FCM Notification Response Code: " + responseCode);
+
+            } catch (Exception e) {
+                Log.e("Tashleeh", "Error");
+                e.printStackTrace();
+            }
+        }).start();
     }
 
 }

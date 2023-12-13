@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_brands_array">
+        <item>الشركة</item>
+        <item>تويوتا</item>
+        <item>فورد</item>
+        <item>شيفروليه</item>
+        <item>هوندا</item>
+        <item>نيسان</item>
+        <item>جيب</item>
+        <item>هيونداي</item>
+        <item>كيا</item>
+        <item>رام تركس</item>
+        <item>سوبارو</item>
+        <item>جي أم سي</item>
+        <item>فولكسفاغن</item>
+        <item>بي إم دبليو</item>
+        <item>مازدا</item>
+        <item>مرسيدس بنز</item>
+        <item>لكزس</item>
+        <item>تسلا</item>
+        <item>دودج</item>
+        <item>أودي</item>
+        <item>بويك</item>
+        <item>أكورا</item>
+        <item>فولفو</item>
+        <item>كاديلاك</item>
+        <item>كرايسلر</item>
+        <item>ميتسوبيشي</item>
+        <item>لاند روفر</item>
+        <item>لينكولن</item>
+        <item>بورش</item>
+        <item>انفينيتي</item>
+        <item>جينيسيس</item>
+        <item>ميني</item>
+        <item>مازيراتي</item>
+        <item>الفا روميو</item>
+        <item>جاكوار</item>
+        <item>بنتلي</item>
+        <item>فيراري</item>
+        <item>لامبورغيني</item>
+        <item>أستون مارتن</item>
+        <item>بوليستار</item>
+        <item>فيات</item>
+        <item>رولز رويس</item>
+        <item>مكلارين</item>
+        <item>لوسيد</item>
+        <item>بوغاتي</item>
+        <item>لوتس</item>
+        <item>ريفيان</item>
+        <item>كانو</item>
+        <item>بونتياك</item>
+        <item>أولدزموبيل</item>
+        <item>ريماك</item>
+
+    </string-array>
+</resources>

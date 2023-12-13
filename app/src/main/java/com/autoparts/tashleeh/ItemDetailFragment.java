@@ -1,5 +1,6 @@
 package com.autoparts.tashleeh;
 
+import android.net.MailTo;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.autoparts.tashleeh.Model.Products;
+import com.autoparts.tashleeh.Model.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +33,12 @@ import com.squareup.picasso.Picasso;
 public class ItemDetailFragment extends Fragment {
 
     private TextView itemTitle;
+    private TextView itemData;
+    private TextView itemAdmin;
+    private TextView itemLoc;
+    private TextView itemNum;
     private ImageView itemImage;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,7 +84,7 @@ public class ItemDetailFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                replaceFragment(new GalleryFragment());
+                replaceFragment(new SearchFragment());
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -90,13 +99,26 @@ public class ItemDetailFragment extends Fragment {
 
         itemImage = view.findViewById(R.id.itemImage);
         itemTitle = view.findViewById(R.id.itemTitle);
+        itemData = view.findViewById(R.id.itemData);
+        itemAdmin = view.findViewById(R.id.itemAdmin);
+        itemLoc  = view.findViewById(R.id.itemLocation);
+        itemNum  = view.findViewById(R.id.itemNumber);
+
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             // Now 'receivedData' contains the data sent from Fragment A
             String receivedData = bundle.getString("title");
             String receivedImage = bundle.getString("image");
+            String receivedBrand = bundle.getString("brand");
+            String receivedYear = bundle.getString("year");
+            String receivedModel = bundle.getString("model");
+            String receivedPrice = bundle.getString("price");
+            String receivedDesc = bundle.getString("desc");
+            String receivedOwner = bundle.getString("owner");
             itemTitle.setText(receivedData);
+            itemData.setText( "الشركة: "+ receivedBrand +"\n"+ "الموديل: " + receivedModel +" - "+receivedYear + "\n"+ "السعر: " + receivedPrice +"\n"+ "التفاصيل: " + receivedDesc);
+            getAdminDetails(receivedOwner);
             Picasso.get().load(receivedImage).into(itemImage);
             //String productID = bundle.getString("pid");
             //getProductDetails(productID);
@@ -106,27 +128,29 @@ public class ItemDetailFragment extends Fragment {
         return view;
     }
 
-//    private void getProductDetails(String productID) {
-//        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Products");
-//        productsRef.child(productID).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.exists()){
-//                    Products products=dataSnapshot.getValue(Products.class);
-//                    itemTitle.setText(products.getPname());
-//                    //productPrice.setText(products.getPrice());
-//                    //productDescription.setText(products.getDescription());
-//                    Picasso.get().load(products.getImage()).into(itemImage);
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    private void getAdminDetails(String AdminID) {
+        DatabaseReference AdminsRef = FirebaseDatabase.getInstance().getReference().child("Admins");
+        AdminsRef.child(AdminID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    Users user = dataSnapshot.getValue(Users.class);
+                    itemAdmin.setText(" اسم التشليح:  " + user.getName() );
+                    itemNum.setText(" الرقم:  " + user.getPhone());
+                    itemLoc.setText(" الموقع:  " + "\n"+ Html.fromHtml(user.getAddress()));
+                    itemLoc.setMovementMethod(LinkMovementMethod.getInstance());
+                    //productPrice.setText(products.getPrice());
+                    //productDescription.setText(products.getDescription());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

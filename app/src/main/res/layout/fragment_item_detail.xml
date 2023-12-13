@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ItemDetailFragment">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -28,7 +28,77 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 />
+            <TextView
+            android:id="@+id/itemData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="data"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+                android:textDirection="rtl"
+            />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:weightSum="10">
+        <TextView
+            android:id="@+id/itemAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="data"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:textDirection="rtl"
+            android:background="#BAC3D5"
+
+            />
+            <TextView
+                android:id="@+id/itemNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="data"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                android:textDirection="rtl"
+                android:background="#BAC3D5"
+
+                />
+            <TextView
+                android:id="@+id/itemLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="data"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                android:textDirection="rtl"
+                android:background="#BAC3D5"
+                android:linksClickable="true"
+                android:autoLink="web|email"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="2"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user"
+            android:tint="#313F5A" />
+
+    </LinearLayout>
 
 
 
